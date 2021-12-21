@@ -48,8 +48,8 @@ def get_num_connections(graph: nx.Graph) -> pd.DataFrame:
     :return: dataframe with one column as the node name and the other the number of connections.
     """
     num_connections = {x: len(graph[x]) for x in list(graph)}
-    df_connections = pd.DataFrame.from_dict(num_connections, "index")
-    df_connections.rename(columns={0: "Num_Connections"}, inplace=True)
+    df_connections = pd.DataFrame.from_dict(num_connections, "index").reset_index()
+    df_connections.rename(columns={'index': 'Feature', 0: "Num_Connections"}, inplace=True)
     df_connections.sort_values(
         by="Num_Connections", ascending=False, inplace=True
     )
