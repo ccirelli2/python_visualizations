@@ -8,26 +8,49 @@ References:
 # Libraries
 import os
 import pandas as pd
-import numpy
 import networkx as nx
 from decouple import config as d_config
 from matplotlib.pyplot import figure
+import matplotlib.pyplot as plt
 
 # Directories
-DIR_SRC = d_config('DIR_SRC')
-DIR_DATA = d_config('DIR_DATA')
+DIR_SRC = d_config("DIR_SRC")
+DIR_DATA = d_config("DIR_DATA")
 
 # Data Files
-JIRA_DATA_FILENAME = 'jira_sample.csv'
+JIRA_DATA_FILENAME = "jira_sample.csv"
 JIRA_DATA = pd.read_csv(os.path.join(DIR_DATA, JIRA_DATA_FILENAME))
-JIRA_DATA_LIM = JIRA_DATA.loc[:, ['Assignee', 'Reporter']]
+JIRA_DATA_LIM = JIRA_DATA.loc[:, ["Assignee", "Reporter"]]
+
+# Declare Variables
+GEN_PLOT = True
 
 # Create Instance of Graph
 nx_Graph = nx.Graph()
 
 # Populate Graph
-n_Graph = nx.from_pandas_edgelist(JIRA_DATA_LIM, 'Assignee', 'Reporter')
+n_Graph = nx.from_pandas_edgelist(JIRA_DATA_LIM, "Assignee", "Reporter")
 
-# Create Figure
-figure(figsize=(10, 8))
-nx.draw_shell(n_Graph, with_labels=True)
+# Generate Plot
+if GEN_PLOT:
+    figure(figsize=(10, 8))
+    nx.draw_shell(n_Graph, with_labels=True)
+    plt.show()
+
+
+# Create Data-Frame Num Connections
+def get_num_connections(graph: nx.Graph) -> pd.DataFrame:
+    """
+    Function to create a dataframe with the node name and connection count.
+
+    :type graph: nx.Graph instance.
+    :param graph: network graph.
+    :return: dataframe with one column as the node name and the other the number of connections.
+    """
+    num_connections = {x: len(graph[x]) for x in list(graph)}
+    df_connections = pd.DataFrame.from_dict(num_connections, "index")
+    df_connections.rename(columns={0: "Num_Connections"}, inplace=True)
+    df_connections.sort_values(
+        by="Num_Connections", ascending=False, inplace=True
+    )
+    return df_connections

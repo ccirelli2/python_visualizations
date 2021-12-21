@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PylintConfigService">
+    <option name="customPylintPath" value="$USER_HOME$/anaconda3/pkgs/pylint-2.12.2-py39h06a4308_0/bin/pylint" />
+  </component>
+</project>
