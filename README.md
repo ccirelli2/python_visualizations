@@ -3,4 +3,4 @@ project template for python repositories
 
 
 # Example Network Graph
-![header image](examples/ex_network_graph.png)
+![header image](examples/ex_network_graph.png, raw=True)
