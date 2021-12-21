@@ -3,3 +3,4 @@ project template for python repositories
 
 
 # Example Network Graph
+<img src=https://github.com/ccirelli2/python_visualizations/blob/main/examples/network_graph.py/>
