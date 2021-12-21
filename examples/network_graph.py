@@ -35,8 +35,8 @@ n_Graph = nx.from_pandas_edgelist(JIRA_DATA_LIM, "Assignee", "Reporter")
 if GEN_PLOT:
     figure(figsize=(10, 8))
     nx.draw_shell(n_Graph, with_labels=True)
-    plt.show()
-
+    # plt.show()
+    plt.savefig('ex_network_graph.png')
 
 # Create Data-Frame Num Connections
 def get_num_connections(graph: nx.Graph) -> pd.DataFrame:
