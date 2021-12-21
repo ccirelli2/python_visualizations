@@ -33,7 +33,7 @@ n_Graph = nx.from_pandas_edgelist(JIRA_DATA_LIM, "Assignee", "Reporter")
 
 # Generate Plot
 if GEN_PLOT:
-    figure(figsize=(10, 8))
+    figure(figsize=(5, 4))
     nx.draw_shell(n_Graph, with_labels=True)
     # plt.show()
     plt.savefig('ex_network_graph.png')
