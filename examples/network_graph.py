@@ -36,21 +36,20 @@ if GEN_PLOT:
     figure(figsize=(5, 4))
     nx.draw_shell(n_Graph, with_labels=True)
     # plt.show()
-    plt.savefig('ex_network_graph.png')
+    plt.savefig("ex_network_graph.png")
 
 # Create Data-Frame Num Connections
 def get_num_connections(graph: nx.Graph) -> pd.DataFrame:
     """
     Function to create a dataframe with the node name and connection count.
-
     :type graph: nx.Graph instance.
     :param graph: network graph.
     :return: dataframe with one column as the node name and the other the number of connections.
     """
     num_connections = {x: len(graph[x]) for x in list(graph)}
     df_connections = pd.DataFrame.from_dict(num_connections, "index").reset_index()
-    df_connections.rename(columns={'index': 'Feature', 0: "Num_Connections"}, inplace=True)
-    df_connections.sort_values(
-        by="Num_Connections", ascending=False, inplace=True
+    df_connections.rename(
+        columns={"index": "Feature", 0: "Num_Connections"}, inplace=True
     )
+    df_connections.sort_values(by="Num_Connections", ascending=False, inplace=True)
     return df_connections
